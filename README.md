@@ -1,3 +1,5 @@
+![Demo][search_as_you_type.gif]
+
 # Search As You Type (Elasticsearch)
 
 Demo code and sample employees data to implement "Search as you type" feature on elasticsearch. 
