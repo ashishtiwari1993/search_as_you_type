@@ -1,4 +1,4 @@
-![Demo][search_as_you_type.gif]
+![demo][search_as_you_type.gif]
 
 # Search As You Type (Elasticsearch)
 
