@@ -2,13 +2,13 @@
 
 # Search As You Type (Elasticsearch)
 
-Demo code and sample employees data to implement "Search as you type" feature on elasticsearch. 
+Demo code and sample employees data to implement the "Search as you type" feature on elasticsearch. 
 
 Written the middleware API in `python` using [flask](https://flask.palletsprojects.com/en/2.0.x/). Used [JQuery](https://jquery.com/) for javascript operations.
 
 ## Installation
 
-Assuming you have successfully installed [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html) and [Kibana](https://www.elastic.co/guide/en/kibana/current/install.html) on your machine and its working perfect. Kindly refer respective installation document if there is any issue.
+Assuming you have successfully installed [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html) and [Kibana](https://www.elastic.co/guide/en/kibana/current/install.html) on your machine and it is working perfectly. Kindly refer respective installation document if there is any issue.
 
 ### Install Python3 & pip3
 
@@ -31,7 +31,7 @@ cd search_as_you_type
 
 ### Create Index and load data
 
-Make sure Elasticsearch and kibana is up and running fine on your machine. 
+Make sure Elasticsearch and kibana are up and running fine on your machine. 
 
 #### Create Index
 
