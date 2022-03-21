@@ -8,7 +8,11 @@ Written the middleware API in `python` using [flask](https://flask.palletsprojec
 
 ## Installation
 
-Assuming you have successfully installed [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html) and [Kibana](https://www.elastic.co/guide/en/kibana/current/install.html) on your machine and it is working perfectly. Kindly refer respective installation document if there is any issue.
+Assuming you have successfully installed [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html) and [Kibana](https://www.elastic.co/guide/en/kibana/current/install.html) on your machine and it is working perfectly. Kindly refer respective installation document. 
+
+OR
+
+You can run [Elasticsearch on the cloud](https://cloud.elastic.co/registration) with a few clicks. 
 
 ### Install Python3 & pip3
 
@@ -68,9 +72,17 @@ Sample [data.json](https://github.com/ashishtiwari1993/search_as_you_type/blob/m
 curl -s -H "Content-Type: application/x-ndjson" -XPOST "localhost:9200/_bulk" --data-binary "@data.json"
 ```
 
+Do not forget to change the elasticsearch's endpoint. 
+
 ### Run `api.py` & test
 
-Start API Server
+Open `api.py` and change elasticsearch endpoint accordingly.
+
+```py
+es = Elasticsearch("http://localhost:9200")
+```
+
+#### Start API Server
 
 ```
 python3 api.py
