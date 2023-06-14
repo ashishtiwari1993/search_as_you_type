@@ -69,7 +69,7 @@ PUT /sayt?pretty
 Sample [data.json](https://github.com/ashishtiwari1993/search_as_you_type/blob/main/data.json) file is given which need to load with the help of [bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html). 
 
 ```
-curl -s -H "Content-Type: application/x-ndjson" -XPOST "localhost:9200/_bulk" --data-binary "@data.json"
+curl -s -H "Content-Type: application/x-ndjson" --cacert /path/to/http_ca.crt  -u "username:password" -XPOST "https://localhost:9200/_bulk" --data-binary "@data.json"
 ```
 
 Do not forget to change the elasticsearch's endpoint. 
@@ -79,7 +79,11 @@ Do not forget to change the elasticsearch's endpoint.
 Open `api.py` and change elasticsearch endpoint accordingly.
 
 ```py
-es = Elasticsearch("http://localhost:9200")
+es = Elasticsearch(
+    "https://localhost:9200",
+    ca_certs = "path/to/ca_certificate",
+    basic_auth = ("username", "password")
+)
 ```
 
 #### Start API Server
