@@ -95,3 +95,13 @@ python3 api.py
 This will start the API service on port `5001`.
 
 Open `index.html` on your browser. 
+
+
+
+#### Template files in the correct location
+```
+myproject/
+    api.py
+    templates/
+        index.html
+```

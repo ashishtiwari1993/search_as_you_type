@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Search as you type</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  #result {
+   position: absolute;
+   width: 100%;
+   max-width:870px;
+   cursor: pointer;
+   overflow-y: auto;
+   max-height: 400px;
+   box-sizing: border-box;
+   z-index: 1001;
+  }
+  .link-class:hover{
+   background-color:#f1f1f1;
+  }
+  </style>
+ </head>
+ <body>
+  <br /><br />
+  <div class="container" style="width:900px;">
+   <h2 align="center">Search as you type</h2>
+   <h3 align="center">Employee Data</h3>   
+   <br /><br />
+   <div align="center">
+    <input type="text" name="search" id="search" placeholder="Search Employee Details" class="form-control" />
+   </div>
+   <ul class="list-group" id="result"></ul>
+   <br />
+    <div class="form-group">
+    <label for="exampleFormControlTextarea1">Details</label>
+    <textarea class="form-control" id="Textarea1" rows="10"></textarea>
+  </div>
+  </div>
+ </body>
+</html>
+
+<script>
+$('#result').on('click', 'li', function() {
+    $('#search').val($.trim($(this).text()));
+    $("#result").html('');
+    id = $(this).attr('id');
+
+    var request = $.ajax({
+      url: "http://localhost:5001/get?id="+id,
+      method: "GET"
+    });
+
+    request.done(function( data ) {
+        $('#Textarea1').val(JSON.stringify(data, null, '\t'));
+    });
+
+    request.fail(function( jqXHR, textStatus ) {
+        console.log( "Request failed: " + textStatus );
+    });
+
+});
+
+$("#search").keyup(function(){
+
+    var search = $('#search').val();
+    if(search == ""){
+        return false;
+    }
+
+    $('#result').html('');
+    $('#Textarea1').val('');
+
+    var request = $.ajax({
+      url: "http://localhost:5001/search?q="+search,
+      method: "GET"
+    });
+
+    request.done(function( data ) {
+        $.each(data, function( key, value ) {
+            d = value._source;
+            d._id = value._id;
+            if("highlight" in value){
+                Object.keys(value["highlight"]).forEach(key => {
+                    s = value["highlight"][key].join('');
+                    d[key] = s;  
+                });
+            }
+            $('#result').append('<li class="list-group-item link-class" id="'+d._id+'">' +d.first_name+' '+d.last_name+' | '+d.email+' | '+d.gender+' | '+d.company+' | '+d.street_address+' | <span class="text-muted">'+d.ip_address+'</span></li>');
+        });
+    });
+
+    request.fail(function( jqXHR, textStatus ) {
+        console.log( "Request failed: " + textStatus );
+    });
+});
+</script>

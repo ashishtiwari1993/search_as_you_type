@@ -10,7 +10,7 @@ es = Elasticsearch(
     basic_auth = ("username", "password")
 )
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 
 @app.route('/search', methods=['GET'])
@@ -65,5 +65,14 @@ def query_getOne():
     response.headers.add('access-control-allow-origin', '*')
     response.headers.add('access-control-allow-methods', 'get, post')
     return response
+
+from flask import request,render_template
+
+@app.route('/', methods=['GET', 'POST'])
+def home():
+   return render_template('index.html')
+
+
+
 
 app.run(host="0.0.0.0", port=5001)
